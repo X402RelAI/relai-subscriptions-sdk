@@ -1,7 +1,13 @@
-# Example — Express backend
+# Examples
 
-A minimal Express server using `@relai-fi/subscriptions` to create a plan, receive signed webhooks
-(provision/suspend a service per subscriber), and gate a premium route on an active subscription.
+Two runnable examples for `@relai-fi/subscriptions`:
+
+- **`express-server.ts`** — the merchant/server side: create a plan, receive signed webhooks
+  (provision/suspend per subscriber), gate a premium route on an active subscription.
+- **`subscribe.ts`** — the subscriber/client side: subscribe a Solana keypair to a plan
+  end-to-end (sign + broadcast + confirm), then check status.
+
+## express-server.ts
 
 ## Run
 
@@ -45,3 +51,20 @@ plan's `webhookUrl` (the example sets it from `PUBLIC_URL`).
 
 > The webhook route is mounted **before** `express.json()` on purpose — the signature is verified
 > against the raw request body.
+
+## subscribe.ts (subscriber side)
+
+Subscribe a funded Solana keypair to a plan, end-to-end:
+
+```bash
+# keypair JSON = array of bytes (e.g. solana-keygen output), funded with a little
+# SOL + the plan's token (devnet USDC for a devnet plan)
+export SUBSCRIBER_KEYPAIR=/path/to/keypair.json
+export SUBSCRIPTIONS_RPC_URL=https://api.devnet.solana.com   # match the plan's network
+npm run subscribe -- <planId>
+```
+
+It uses `Subscriber.fromKeypair({ client, connection, keypair })` from
+`@relai-fi/subscriptions/subscriber`, which handles the two-stage flow
+(init authority → subscribe), signs + broadcasts each tx, and confirms — then prints status.
+No api key needed (the subscribe flow is public).

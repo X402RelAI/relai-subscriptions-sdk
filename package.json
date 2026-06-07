@@ -11,6 +11,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./subscriber": {
+      "types": "./dist/subscriber.d.ts",
+      "import": "./dist/subscriber.js",
+      "require": "./dist/subscriber.cjs"
     }
   },
   "files": ["dist", "README.md", "LICENSE"],
@@ -37,7 +42,14 @@
   "homepage": "https://relai.fi/documentation/subscriptions",
   "license": "MIT",
   "engines": { "node": ">=18" },
+  "peerDependencies": {
+    "@solana/web3.js": "^1.91.0"
+  },
+  "peerDependenciesMeta": {
+    "@solana/web3.js": { "optional": true }
+  },
   "devDependencies": {
+    "@solana/web3.js": "^1.95.3",
     "@types/node": "^20.11.0",
     "tsup": "^8.0.2",
     "typescript": "^5.4.0",

@@ -71,6 +71,20 @@ await relai.subscribe.confirm(plan.planId, wallet, sig);
 
 (`signAndSend` is your own wallet-adapter code: deserialize the base64 tx, sign, broadcast.)
 
+**Node / backend?** Use the `Subscriber` helper (subpath `@relai-fi/subscriptions/subscriber`,
+needs `@solana/web3.js`) — it runs the whole two-stage flow for you:
+
+```ts
+import { Connection, Keypair } from "@solana/web3.js";
+import { Subscriber } from "@relai-fi/subscriptions/subscriber";
+
+const connection = new Connection("https://api.devnet.solana.com", "confirmed");
+const subscriber = Subscriber.fromKeypair({ client: relai, connection, keypair });
+
+const subscription = await subscriber.subscribe(plan.planId); // prepare → sign → confirm
+await subscriber.cancel(subscription.subscriptionId);
+```
+
 ### Cancel
 
 ```ts

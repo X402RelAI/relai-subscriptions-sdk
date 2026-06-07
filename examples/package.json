@@ -3,10 +3,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "tsx express-server.ts"
+    "start": "tsx express-server.ts",
+    "subscribe": "tsx subscribe.ts"
   },
   "dependencies": {
     "@relai-fi/subscriptions": "file:..",
+    "@solana/web3.js": "^1.95.3",
     "express": "^4.19.2"
   },
   "devDependencies": {
