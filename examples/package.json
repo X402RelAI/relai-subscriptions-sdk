@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "tsx express-server.ts",
-    "subscribe": "tsx subscribe.ts"
+    "start": "tsx --env-file=.env express-server.ts",
+    "subscribe": "tsx --env-file=.env subscribe.ts"
   },
   "dependencies": {
     "@relai-fi/subscriptions": "file:..",

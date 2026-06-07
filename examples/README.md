@@ -54,15 +54,17 @@ plan's `webhookUrl` (the example sets it from `PUBLIC_URL`).
 
 ## subscribe.ts (subscriber side)
 
-Subscribe a funded Solana keypair to a plan, end-to-end:
+Subscribe a funded Solana keypair to a plan, end-to-end. Config lives in `.env`
+(auto-loaded via `--env-file`; gitignored):
 
 ```bash
-# keypair JSON = array of bytes (e.g. solana-keygen output), funded with a little
-# SOL + the plan's token (devnet USDC for a devnet plan)
-export SUBSCRIBER_KEYPAIR=/path/to/keypair.json
-export SUBSCRIPTIONS_RPC_URL=https://api.devnet.solana.com   # match the plan's network
-npm run subscribe -- <planId>
+cp .env.example .env     # then fill SUBSCRIBER_KEYPAIR, RELAI_BASE_URL, RELAI_PLAN_ID
+npm install
+npm run subscribe -- <planId>     # planId optional if RELAI_PLAN_ID is set
 ```
+
+`SUBSCRIBER_KEYPAIR` is a path to a Solana keypair JSON (byte array, e.g. `solana-keygen`
+output) funded with a little SOL + the plan's token (devnet USDC for a devnet plan).
 
 It uses `Subscriber.fromKeypair({ client, connection, keypair })` from
 `@relai-fi/subscriptions/subscriber`, which handles the two-stage flow
