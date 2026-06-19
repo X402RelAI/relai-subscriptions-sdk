@@ -1,6 +1,6 @@
 {
   "name": "@relai-fi/subscriptions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript SDK for RelAI subscriptions — recurring USDC billing on Solana. Create plans, manage subscriptions, verify signed webhooks, and gate access with one middleware.",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -18,7 +18,11 @@
       "require": "./dist/subscriber.cjs"
     }
   },
-  "files": ["dist", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -41,12 +45,16 @@
   ],
   "homepage": "https://relai.fi/documentation/subscriptions",
   "license": "MIT",
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "peerDependencies": {
     "@solana/web3.js": "^1.91.0"
   },
   "peerDependenciesMeta": {
-    "@solana/web3.js": { "optional": true }
+    "@solana/web3.js": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@solana/web3.js": "^1.95.3",
