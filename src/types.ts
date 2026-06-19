@@ -2,7 +2,13 @@
 export type Network = "solana" | "solana-devnet";
 
 export type PlanStatus = "active" | "inactive";
-export type SubscriptionStatus = "active" | "canceled" | "past_due";
+/**
+ * `active` — paid and current.
+ * `past_due` — a charge failed; in the dunning grace window (still entitled), retries pending.
+ * `unpaid` — dunning exhausted with the "unpaid" final action: record kept, access cut.
+ * `canceled` — ended (by the subscriber, or dunning exhausted with the "cancel" final action).
+ */
+export type SubscriptionStatus = "active" | "canceled" | "past_due" | "unpaid";
 
 /** A published subscription plan (merchant side). */
 export interface Plan {
